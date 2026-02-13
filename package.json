@@ -12,6 +12,12 @@
     "build": "rimraf dist && tsc"
   },
   "packageManager": "pnpm@10.28.2",
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "rimraf": "^6.1.2"
+  },
   "keywords": [
     "nodejs",
     "http",
@@ -24,10 +30,12 @@
     "observability"
   ],
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^25.2.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "rimraf": "^6.1.2"
-  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piaxjs/piax.git"
+  },
+  "bugs": {
+    "url": "https://github.com/piaxjs/piax/issues"
+  },
+  "homepage": "https://github.com/piaxjs/piax#readme"
 }
