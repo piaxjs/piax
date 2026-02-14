@@ -1,3 +1,3 @@
-import { App as Pia } from "./app.js";
+import { App as Piax } from "./app.js";
 
-export { Pia };
+export { Piax };
