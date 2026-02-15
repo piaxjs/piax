@@ -20,7 +20,8 @@
     "test": "tsx --test test/*.test.ts",
     "test:w": "tsx watch --test test/*.test.ts",
     "clean": "rimraf dist",
-    "build": "pnpm clean && tsc --incremental false"
+    "build": "pnpm clean && tsc --incremental false",
+    "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
     "@types/node": "^25.2.0",
