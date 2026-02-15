@@ -11,6 +11,7 @@ export class App {
   private errorHandler: (error: Error, ctx: Context) => void;
   private maxBodySize: number = 10 * 1024 * 1024; // 10MB default
 
+
   constructor() {
     this.errorHandler = (error, ctx) => {
       console.error("Unhandled error:", error);

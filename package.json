@@ -4,16 +4,23 @@
   "version": "0.0.0",
   "packageManager": "pnpm@10.28.2",
   "scripts": {
-    "dev": "pnpm --parallel -F piax -F basic-app dev",
-    "dev:piax": "pnpm -F piax dev",
-    "dev:basic-app": "pnpm -F basic-app dev",
+    "dev": "pnpm -F piax dev",
+    "sample": "pnpm -F examples dev",
+    "dev:all": "pnpm --parallel -F piax -F examples dev",
     "bench": "pnpm -F benchmarks bench",
-    "bench:core": "pnpm -F benchmarks bench --apps piax",
+    "bench:piax": "pnpm -F benchmarks bench --apps piax",
     "test": "pnpm -r test",
     "build": "pnpm -r build"
   },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "execa": "^9.6.1",
+    "yargs": "^18.0.0"
+  },
   "devDependencies": {
     "@types/node": "^25.2.3",
+    "@types/yargs": "^17.0.35",
+    "rimraf": "^6.1.2",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }

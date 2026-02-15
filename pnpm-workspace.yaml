@@ -1,7 +1,10 @@
 packages:
   - packages/*
-  - examples/*
+  - examples
   - benchmarks
+
+settings:
+  enablePrePostScripts: true
 
 onlyBuiltDependencies:
   - esbuild

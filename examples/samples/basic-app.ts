@@ -3,9 +3,9 @@ import { Piax } from "piax";
 const app = new Piax();
 
 /// hello world
-app.get("/", (ctx) => "Hello World");
+app.get("/", (ctx) => "Hello asdf");
 
-// params
+/// params
 app.get("/user/:uid", (ctx) => {
   const { uid } = ctx.params;
   ctx.json({ uid });

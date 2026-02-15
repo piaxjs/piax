@@ -12,6 +12,9 @@
     "exactOptionalPropertyTypes": true,
 
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+
+    /// disable clear logs
+    "preserveWatchOutput": true
   }
 }
