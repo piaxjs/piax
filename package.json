@@ -1,40 +1,20 @@
 {
-  "name": "piax",
-  "version": "0.1.0",
-  "type": "module",
-  "description": "A modern, type-safe HTTP framework for Node.js",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "dev": "tsc --watch",
-    "test": "tsx --test test/*.test.ts",
-    "test:w": "tsx watch --test test/*.test.ts",
-    "build": "rimraf dist && tsc"
-  },
+  "name": "piaxjs",
+  "private": true,
+  "version": "0.0.0",
   "packageManager": "pnpm@10.28.2",
+  "scripts": {
+    "dev": "pnpm --parallel -F piax -F basic-app dev",
+    "dev:piax": "pnpm -F piax dev",
+    "dev:basic-app": "pnpm -F basic-app dev",
+    "bench": "pnpm -F benchmarks bench",
+    "bench:core": "pnpm -F benchmarks bench --apps piax",
+    "test": "pnpm -r test",
+    "build": "pnpm -r build"
+  },
   "devDependencies": {
-    "@types/node": "^25.2.0",
+    "@types/node": "^25.2.3",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "rimraf": "^6.1.2"
-  },
-  "keywords": [
-    "nodejs",
-    "http",
-    "server",
-    "router",
-    "web",
-    "framework",
-    "typescript",
-    "middleware"
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/piaxjs/piax.git"
-  },
-  "bugs": {
-    "url": "https://github.com/piaxjs/piax/issues"
-  },
-  "homepage": "https://github.com/piaxjs/piax#readme"
+    "typescript": "^5.9.3"
+  }
 }

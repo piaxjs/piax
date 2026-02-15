@@ -1,0 +1,52 @@
+{
+  "name": "piax",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A modern, type-safe HTTP framework for Node.js",
+  "packageManager": "pnpm@10.28.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsc --watch",
+    "test": "tsx --test test/*.test.ts",
+    "test:w": "tsx watch --test test/*.test.ts",
+    "clean": "rimraf dist",
+    "build": "pnpm clean && tsc --incremental false"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "rimraf": "^6.1.2"
+  },
+  "keywords": [
+    "nodejs",
+    "http",
+    "http-server",
+    "server",
+    "router",
+    "web",
+    "framework",
+    "typescript",
+    "api",
+    "rest-api"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piaxjs/piax.git"
+  },
+  "bugs": {
+    "url": "https://github.com/piaxjs/piax/issues"
+  },
+  "homepage": "https://github.com/piaxjs/piax#readme"
+}

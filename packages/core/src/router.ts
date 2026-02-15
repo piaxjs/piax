@@ -75,8 +75,15 @@ export class Router<T = Context> {
       const params: Record<string, string> = {};
       const names = route.paramNames!;
 
-      for (let i = 0; i < names.length; i++) {
+      /* for (let i = 0; i < names.length; i++) {
         params[names[i]] = match[i + 1];
+      } */
+
+      for (let i = 0, l = names.length; i < l; i++) {
+        const value = match[i + 1];
+        if (value !== undefined) {
+          params[names[i]!] = value;
+        }
       }
 
       return { route, params };

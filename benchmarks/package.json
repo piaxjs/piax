@@ -1,0 +1,36 @@
+{
+  "name": "benchmarks",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.2",
+  "scripts": {
+    "bench": "tsx bench.ts",
+    "bench:quick": "tsx bench.ts --preset quick",
+    "bench:prod": "tsx bench.ts --preset production",
+    "bench:stress": "tsx bench.ts --preset stress",
+    "save:md": "tsx md.ts"
+  },
+  "dependencies": {
+    "@elysiajs/node": "^1.4.4",
+    "@hono/node-server": "^1.19.9",
+    "@koa/router": "^15.3.0",
+    "autocannon": "^8.0.0",
+    "chalk": "^5.6.2",
+    "cli-table3": "^0.6.5",
+    "elysia": "^1.4.23",
+    "express": "^5.2.1",
+    "fastify": "^5.7.4",
+    "h3": "2.0.1-rc.14",
+    "hono": "^4.11.9",
+    "koa": "^3.1.1",
+    "koa-body": "^7.0.1",
+    "piax": "workspace:*",
+    "yargs": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/autocannon": "^7.12.7",
+    "@types/express": "^5.0.6",
+    "@types/koa": "^3.0.1",
+    "@types/yargs": "^17.0.35"
+  }
+}

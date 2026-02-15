@@ -140,3 +140,6 @@ vite.config.ts.timestamp-*
 
 #
 .http
+.vscode
+pnpm-lock.yaml
+benchmarks/results/*

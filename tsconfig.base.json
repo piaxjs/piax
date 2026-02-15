@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  }
+}

@@ -25,7 +25,7 @@ export const pathToRegex = (path: string, paramNames: string[]): RegExp => {
   let paramName = "";
 
   for (let i = 0; i < path.length; i++) {
-    const char = path[i];
+    const char = path[i] as string;
     if (char === ":") {
       inParam = true;
       paramName = "";
