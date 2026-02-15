@@ -2,7 +2,7 @@ import { Piax } from "piax";
 
 const app = new Piax();
 app.get("/", (ctx) => {
-  return ctx.json({ message: "Hello Pia" });
+  return ctx.json({ message: "Hello Piax" });
 });
 
 app.get("/api/users", (ctx) => {
