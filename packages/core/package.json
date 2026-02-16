@@ -1,6 +1,6 @@
 {
   "name": "piax",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "A modern, type-safe HTTP framework for Node.js",
   "packageManager": "pnpm@10.28.2",
