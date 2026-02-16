@@ -3,7 +3,7 @@ import { Piax } from "piax";
 const app = new Piax();
 
 /// hello world
-app.get("/", (ctx) => "Hello asdf");
+app.get("/", (ctx) => "Hello World");
 
 /// params
 app.get("/user/:uid", (ctx) => {

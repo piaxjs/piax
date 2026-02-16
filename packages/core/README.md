@@ -1,33 +1,100 @@
 # Piax
 
-A modern, type-safe HTTP framework for Node.js
+A modern, type-safe HTTP framework for Node.js, built with TypeScript.
 
-⚠️ This project is under heavy development.
+⚠️ This project is under heavy development.  
 Not ready for production use.
 
-**Basic Usage**
-```ts
-import { Piax } from "piax";
+## Quick Start
 
-const app = new Piax();
+### Create a new project
 
-app.get("/", () => "Hello Piax!");
+```bash
+# using npm
+npm create piax@latest
+
+# or using pnpm
+pnpm create piax@latest
+
+# or via yarn
+yarn create piax
 ```
 
-**Basic Routing**
-```ts
-app.get("/user/:id", ( ctx ) => {
-  const { id } = ctx.params; // ✅ type-safe
-  return { id: Number(id) };
-});
+### Install & run
 
-app.post("/post/:pid", ({ params, body }) => {
-  const { pid } = params;
-  const data = body; // ✅ parsed & type-safe
-  return { pid, data };
-});
-
+```bash
+cd <my-app>
+npm install
+npm run dev
 ```
+
+
+## Examples
+
+### Basic App
+
+```ts
+import { Piax } from 'piax'
+
+const app = new Piax()
+
+app.get('/', () => 'Hello Piax!')
+
+app.listen(2323)
+```
+
+### Basic Routing
+
+```ts
+import { Piax } from 'piax'
+
+const app = new Piax()
+
+// Route params (type-safe)
+app.get('/user/:id', (ctx) => {
+  return { id: ctx.params.id } // ✅ parsed & type-safe
+})
+
+// Query params
+app.get('/search', (ctx) => {
+  return { query: ctx.query.q }
+})
+
+// POST with body
+app.post('/posts', (ctx) => {
+  return { data: ctx.body }
+})
+
+app.listen(2323)
+```
+
+## Context
+
+The ctx object provides request/response utilities:
+
+#### Properties
+
+- `ctx.method` - HTTP method (GET, POST, etc.)
+- `ctx.path` - Request path
+- `ctx.url` - Full request URL
+- `ctx.params` - Route parameters (type-safe)
+- `ctx.query` - Query string parameters
+- `ctx.headers` - Request headers
+- `ctx.body` - Request body (parsed)
+- `ctx.status` - Response status code
+
+#### Methods
+
+- `ctx.json(data)` - Send response json
+- `ctx.text(text)` - Send response text
+
+
+## Links
+
+- [GitHub Repository](https://github.com/piaxjs/piax)
+- [Issue Tracker](https://github.com/piaxjs/piax/issues)
+- [NPM Package](https://www.npmjs.com/package/piax)
+
 
 ## 📄 License
 
