@@ -1,15 +1,15 @@
 import type { Context, Handler, Method } from "./types.js";
 
-export interface Route<TContext> {
+export interface Route {
   method: Method;
   path: string;
   paramNames?: string[];
   pattern?: RegExp;
-  handler: Handler<TContext>;
+  handler: Handler<any>;
 }
 
-export interface RouteMatch<TContext = Context> {
-  route: Route<TContext>;
+export interface RouteMatch {
+  route: Route;
   params: Record<string, string>;
 }
 
@@ -19,11 +19,11 @@ export interface RouteInfo {
   isDynamic: boolean;
 }
 
-export class Router<T = Context> {
-  private readonly staticRoutes = new Map<Method, Map<string, Route<T>>>();
-  private readonly dynamicRoutes = new Map<Method, Route<T>[]>();
+export class Router {
+  private readonly staticRoutes = new Map<Method, Map<string, Route>>();
+  private readonly dynamicRoutes = new Map<Method, Route[]>();
 
-  add(method: Method, path: string, handler: Handler<T>) {
+  add(method: Method, path: string, handler: Handler<any>) {
     const isDynamic = path.includes(":");
 
     if (!isDynamic) {
@@ -40,7 +40,7 @@ export class Router<T = Context> {
     const paramNames: string[] = [];
     const pattern = this.pathToRegex(path, paramNames);
 
-    const route: Route<T> = {
+    const route: Route = {
       method,
       path,
       paramNames,
@@ -57,7 +57,7 @@ export class Router<T = Context> {
     methodRoutes.push(route);
   }
 
-  match(method: Method, path: string): RouteMatch<T> | null {
+  match(method: Method, path: string): RouteMatch | null {
     // static O(1)
     const staticRoute = this.staticRoutes.get(method)?.get(path);
     if (staticRoute) {

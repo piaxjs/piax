@@ -2,7 +2,8 @@
 
 A modern, type-safe HTTP framework for Node.js, built with TypeScript.
 
-> ⚠️ API is unstable and may change. Not recommended for production use.
+> [!WARNING]
+> API is unstable and may change. Not recommended for production use.
 
 
 ## Quick Start
@@ -10,7 +11,6 @@ A modern, type-safe HTTP framework for Node.js, built with TypeScript.
 ### Create a new project
 
 ```bash
-# using npm
 npm create piax@latest
 
 # or using pnpm
@@ -23,7 +23,7 @@ yarn create piax
 ### Install & run
 
 ```bash
-cd <app name>
+cd <app-name>
 npm install
 npm run dev
 ```

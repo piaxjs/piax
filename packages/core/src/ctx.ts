@@ -1,11 +1,10 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import type { Context, Method } from "./types.js";
+import type { BaseContext, Context, Method } from "./types.js";
 import type { Route, RouteMatch } from "./router.js";
 
 // query parser (singleton)
 const queryParsers = {
-  // Simple query
-  fastParse(queryString: string): Record<string, string | string[]> {
+  parse(queryString: string): Record<string, string | string[]> {
     const result: Record<string, string | string[]> = {};
     let start = 0;
     const length = queryString.length;
@@ -36,7 +35,7 @@ const queryParsers = {
   },
 };
 
-export function createContext(req: IncomingMessage, res: ServerResponse, matchRoute?: RouteMatch): Context {
+export function createContext(req: IncomingMessage, res: ServerResponse, matchRoute?: RouteMatch): BaseContext {
   const url = req.url || "/";
   const queryStart = url.indexOf("?");
   const hasQuery = queryStart !== -1;
@@ -46,7 +45,7 @@ export function createContext(req: IncomingMessage, res: ServerResponse, matchRo
   ///
   let _queryCache: Record<string, string | string[]> | null = null;
   ///
-  const context: Context = {
+  return {
     req,
     res,
     method: (req.method || "GET") as Method,
@@ -57,12 +56,12 @@ export function createContext(req: IncomingMessage, res: ServerResponse, matchRo
     body: undefined,
     get query(): Record<string, string | string[]> {
       if (!_queryCache) {
-        _queryCache = queryString ? queryParsers.fastParse(queryString) : {};
+        _queryCache = queryString ? queryParsers.parse(queryString) : {};
       }
       return _queryCache;
     },
-    param(key: string): string | undefined {
-      return matchRoute?.params?.[key] as string | undefined;
+    param(key: string): string {
+      return matchRoute?.params?.[key] as string;
     },
     status(status = 200) {
       if (res.writableEnded) return;
@@ -87,6 +86,4 @@ export function createContext(req: IncomingMessage, res: ServerResponse, matchRo
       res.end(data);
     },
   };
-
-  return context;
 }

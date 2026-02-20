@@ -1,7 +1,7 @@
-import { Pia } from "../src/index";
+import { Piax } from "../src/index";
 
 export const createTestApp = () => {
-  const app = new Pia();
+  const app = new Piax();
   ///
   app.get("/", (ctx) => {
     ctx.text("Hello Pia");

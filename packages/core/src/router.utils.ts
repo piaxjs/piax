@@ -3,9 +3,8 @@
  */
 export const normalizePath = (path: string): string => {
   let normalized = path.trim();
-  if (!normalized.startsWith("/")) {
-    normalized = "/" + normalized;
-  }
+  if (!normalized.startsWith("/")) normalized = "/" + normalized;
+
   normalized = normalized.replace(/\/+/g, "/");
   if (normalized.length > 1 && normalized.endsWith("/")) {
     normalized = normalized.slice(0, -1);

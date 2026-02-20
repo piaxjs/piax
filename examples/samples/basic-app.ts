@@ -3,13 +3,7 @@ import { Piax } from "piax";
 const app = new Piax();
 
 /// hello world
-app.get("/", (ctx) => "Hello World");
-
-/// params
-app.get("/user/:uid", (ctx) => {
-  const { uid } = ctx.params;
-  ctx.json({ uid });
-});
+app.get("/", (ctx) => "Hello Piax");
 
 /// serve
 app.serve(2332, () => {

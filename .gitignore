@@ -143,3 +143,5 @@ vite.config.ts.timestamp-*
 .vscode
 pnpm-lock.yaml
 benchmarks/results/*
+.keep
+.keep/*

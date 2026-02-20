@@ -1,18 +1,19 @@
 import { createServer, IncomingMessage, ServerResponse, Server } from "node:http";
-import { Router } from "./router.js";
-import type { Context, Handler, Method } from "./types.js";
+import { Router, type RouteMatch } from "./router.js";
+import type { BaseContext, Context, Handler, Method } from "./types.js";
 import { Container } from "./container.js";
 import { createContext } from "./ctx.js";
 
 export class App {
+  private prefix = "";
   private server?: Server;
-  private router = new Router<Context>();
+  private router = new Router();
   public container: Container = new Container();
-  private errorHandler: (error: Error, ctx: Context) => void;
-  private maxBodySize: number = 10 * 1024 * 1024; // 10MB default
+  private errorHandler: (error: Error, ctx: BaseContext) => void;
+  private maxBodySize: number = 6 * 1024 * 1024; // 6MB default
 
-
-  constructor() {
+  constructor(prefix = "") {
+    this.prefix = prefix;
     this.errorHandler = (error, ctx) => {
       console.error("Unhandled error:", error);
       if (!ctx.res.writableEnded) {
@@ -22,31 +23,36 @@ export class App {
     };
   }
 
-  get(path: string, handler: Handler) {
+  get<TPath extends string>(path: TPath, handler: Handler<TPath>) {
     this.router.add("GET", path, handler);
+    return this;
   }
 
-  post(path: string, handler: Handler) {
+  post<TPath extends string>(path: TPath, handler: Handler<TPath>) {
     this.router.add("POST", path, handler);
+    return this;
   }
 
-  put(path: string, handler: Handler) {
+  put<TPath extends string>(path: string, handler: Handler<TPath>) {
     this.router.add("PUT", path, handler);
   }
 
-  delete(path: string, handler: Handler) {
+  delete<TPath extends string>(path: string, handler: Handler<TPath>) {
     this.router.add("DELETE", path, handler);
   }
 
-  patch(path: string, handler: Handler) {
+  patch<TPath extends string>(path: string, handler: Handler<TPath>) {
     this.router.add("PATCH", path, handler);
   }
+
+  ///
+  group(prefix: string, fn: (app: App) => void) {}
 
   setMaxBodySize(size: number) {
     this.maxBodySize = size;
   }
 
-  onError(handler: (error: Error, ctx: Context) => void) {
+  onError(handler: (error: Error, ctx: BaseContext) => void) {
     this.errorHandler = handler;
   }
 
@@ -80,7 +86,7 @@ export class App {
       }
       // Execute handler
       const result = await matchRoute.route.handler(ctx);
-      if (res.writableEnded || result instanceof Response) {
+      if (res.writableEnded) {
         return;
       }
       ///
@@ -102,7 +108,7 @@ export class App {
     }
   };
 
-  private async parseRequestBody(req: IncomingMessage, ctx: Context) {
+  private async parseRequestBody(req: IncomingMessage, ctx: BaseContext) {
     const contentType = req.headers["content-type"] || "";
     let size = 0;
     const chunks: Buffer[] = [];

@@ -4,8 +4,6 @@ This directory contains example applications for **Piax**.
 
 It is used during development to experiment with features and test real-world usage patterns.
 
-> This is not production code.
-
 ## Usage
 
 Inside the `examples` directory:
@@ -13,9 +11,10 @@ Inside the `examples` directory:
 ```bash
 pnpm dev
 ```
-Runs the default sample: ``samples/basic-app``
+Runs the default sample: ``samples/basic-app.ts``
 
-**Run a specific sample:**
+### Run a specific sample:
+
 ```bash
 pnpm dev --sample basic-app
 # or
@@ -25,12 +24,14 @@ pnpm dev -s basic-app
 ## Running Without the CLI
 
 Samples can also be executed directly using tsx:
+
 ```bash
 tsx samples/basic-app.ts
 # or
 tsx samples/another/index.ts
 ```
-The CLI simply exists to make this process easier and more convenient.
+> [!NOTE]
+> The CLI simply exists to make this process easier and more convenient.
 
 ## Structure
 ```bash
@@ -38,6 +39,7 @@ examples/
 ├─ index.ts
 └─ samples/
    ├─ basic-app.ts
+   ├─ routing.ts
    └─ another/
       └─ index.ts
 ```

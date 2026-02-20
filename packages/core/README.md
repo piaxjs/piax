@@ -2,15 +2,14 @@
 
 A modern, type-safe HTTP framework for Node.js, built with TypeScript.
 
-⚠️ This project is under heavy development.  
-Not ready for production use.
+> [!WARNING]
+> This project is under heavy development. Not ready for production use.
 
 ## Quick Start
 
 ### Create a new project
 
 ```bash
-# using npm
 npm create piax@latest
 
 # or using pnpm
@@ -28,7 +27,6 @@ npm install
 npm run dev
 ```
 
-
 ## Examples
 
 ### Basic App
@@ -40,7 +38,7 @@ const app = new Piax()
 
 app.get('/', () => 'Hello Piax!')
 
-app.listen(2323)
+app.listen(2332)
 ```
 
 ### Basic Routing
@@ -65,7 +63,7 @@ app.post('/posts', (ctx) => {
   return { data: ctx.body }
 })
 
-app.listen(2323)
+app.listen(2332)
 ```
 
 ## Context

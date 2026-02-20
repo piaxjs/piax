@@ -2,7 +2,15 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 
 export type Method = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
-export interface Context {
+export type ExtractParams<T extends string> = string extends T
+  ? Record<string, string>
+  : T extends `${infer _Start}:${infer Param}/${infer Rest}`
+    ? { [K in Param | keyof ExtractParams<Rest>]: string }
+    : T extends `${infer _Start}:${infer Param}`
+      ? { [K in Param]: string }
+      : {};
+
+export interface BaseContext {
   req: IncomingMessage;
   res: ServerResponse;
   method: Method;
@@ -10,16 +18,18 @@ export interface Context {
   fullPath?: string; // has query
   headers: Record<string, string | string[] | undefined>;
   body: unknown;
-  params: Record<string, unknown>;
+  params: Record<string, string>;
   query: Record<string, string | string[]>;
-  searchParams?: URLSearchParams; // Optional
   status: (status?: number) => void;
   json: (data: unknown, status?: number) => void;
   text: (data: string, status?: number) => void;
   html: (data: string, status?: number) => void;
-  param: (key: string) => string | undefined; // Helper
+  param: (key: string) => string; // Helper
 }
 
-//export type Handler<TContext = Context> = (ctx: Context) => void | Promise<void>;
-export type HandlerResponse = Response | string | object | void | Promise<Response | string | object | void>;
-export type Handler<TContext = Context> = (ctx: TContext) => HandlerResponse;
+export type Context<TPath extends string> = Omit<BaseContext, "params"> & {
+  params: ExtractParams<TPath>;
+};
+
+type HandlerResponse = Response | string | object | void | Promise<Response | string | object | void>;
+export type Handler<TPath extends string> = (ctx: Context<TPath>) => HandlerResponse;
